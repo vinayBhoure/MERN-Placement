@@ -1,6 +1,6 @@
-import { FaSearch, FaShoppingBag, FaSignInAlt, FaSignLanguage, FaSignOutAlt, FaUserAlt } from "react-icons/fa"
+import { FaSearch, FaShoppingBag, FaSignInAlt, FaSignOutAlt, FaUserAlt } from "react-icons/fa"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { ReactElement, useState } from "react"
 
 const user = { _id: 1, role: "admin" }
 
@@ -10,26 +10,39 @@ function Header() {
   const dialogHandler = () => setOpenDialog(!openDialog)
 
   return (
-    <div className="flex justify-end gap-4">
-      <Link to="/">Home</Link>
-      <Link to="/search"><FaSearch /></Link>
-      <Link to="/cart"><FaShoppingBag /></Link>
+    <div className="flex justify-end items-center gap-4 p-4">
+      <LinkTo func={dialogHandler} path="/">Home</LinkTo>
+      <LinkTo func={dialogHandler} path="/search"><FaSearch /></LinkTo>
+      <LinkTo func={dialogHandler} path="/cart"><FaShoppingBag /></LinkTo>
 
       {user?._id ?
         <>
-          <button onClick={dialogHandler}>
+          <button className="pointer bg-[transparent] hover:text-[#006A88] text-lg border-none " onClick={dialogHandler}>
             <FaUserAlt />
-            <dialog open={openDialog}>
-              {user.role === "admin" && <Link to="/admin/dashboard">Admin</Link>}
-              <Link to='/orders'>Orders</Link>
-              <Link to='/profile'>Profile</Link>
-              <Link to='/logout'>< FaSignOutAlt /></Link>
+            <dialog className=""
+              open={openDialog}>
+              {user.role === "admin" && <LinkTo path="/admin/dashboard">Admin</LinkTo>}
+              <LinkTo path='/orders'>Orders</LinkTo>
+              <LinkTo path='/profile'>Profile</LinkTo>
+              <LinkTo path='/logout'>< FaSignOutAlt /></LinkTo>
             </dialog>
           </button>
         </>
         :
-        <Link to="/login"><FaSignInAlt /></Link>}
+        <LinkTo path="/login"><FaSignInAlt /></LinkTo>}
     </div>
+  )
+}
+
+interface LinkToProps {
+  path: string,
+  children: ReactElement | string
+  func?: () => void
+}
+
+const LinkTo = ({ path, children, func }: LinkToProps) => {
+  return (
+    <Link className="text-[#2E2E2E] hover:text-[#006A88] text-lg tracking-wide" onClick={func} to={path}>{children}</Link>
   )
 }
 
