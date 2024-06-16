@@ -1,0 +1,7 @@
+.product-box{
+   background-color: white;
+   /* padding: 2rem; */
+   overflow: auto;
+   height: 100%;
+   width: 100%;
+}
