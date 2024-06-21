@@ -64,5 +64,19 @@ export const deleteCoupon = TryCatch(async (req, res, next) => {
         success: true,
         message: `Coupon ${coupon.code} Deleted Successfully`,
     });
-});
+});export const createPayment = TryCatch(async (req, res, next) => {
+    const { amount } = req.body;
+
+    if (!amount) return next(new ErrorHandler("Please enter amount", 400));
+
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: Number(amount) * 100,
+        currency: "inr",
+    });
+
+    return res.status(201).json({
+        success: true,
+        clientSecret: paymentIntent.client_secret,
+    });
+})
 
