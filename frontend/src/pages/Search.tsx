@@ -1,6 +1,5 @@
 
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
@@ -147,8 +146,8 @@ export default function Component() {
                 className="w-full"
               />
               <div className="mt-2 flex justify-between text-sm text-muted-foreground">
-                <span>${priceRange[0]}</span>
-                <span>${priceRange[1]}</span>
+                <span>{priceRange[0]}</span>
+                <span>{priceRange[1]}</span>
               </div>
             </div>
             <div>
@@ -224,7 +223,7 @@ export default function Component() {
                 <h3 className="text-lg font-bold">{product.title}</h3>
                 <p className="text-sm text-muted-foreground">{product.tagline}</p>
                 <div className="flex items-center justify-between mt-4">
-                  <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
+                  <span className="text-lg font-bold">{product.price.toFixed(2)}</span>
                   <div className="flex items-center gap-1">
                     <div className="flex items-center gap-1">
                       <StarIcon className="w-4 h-4" />
@@ -280,74 +279,6 @@ function FilterIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-
-function ListOrderedIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="10" x2="21" y1="6" y2="6" />
-      <line x1="10" x2="21" y1="12" y2="12" />
-      <line x1="10" x2="21" y1="18" y2="18" />
-      <path d="M4 6h1v4" />
-      <path d="M4 10h2" />
-      <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
-    </svg>
-  )
-}
-
-
-function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
-  )
-}
-
-
-function MountainIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-    </svg>
-  )
-}
-
-
 function StarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -366,3 +297,69 @@ function StarIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+// function ListOrderedIcon(props: React.SVGProps<SVGSVGElement>) {
+//   return (
+//     <svg
+//       {...props}
+//       xmlns="http://www.w3.org/2000/svg"
+//       width="24"
+//       height="24"
+//       viewBox="0 0 24 24"
+//       fill="none"
+//       stroke="currentColor"
+//       strokeWidth="2"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     >
+//       <line x1="10" x2="21" y1="6" y2="6" />
+//       <line x1="10" x2="21" y1="12" y2="12" />
+//       <line x1="10" x2="21" y1="18" y2="18" />
+//       <path d="M4 6h1v4" />
+//       <path d="M4 10h2" />
+//       <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
+//     </svg>
+//   )
+// }
+
+
+// function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
+//   return (
+//     <svg
+//       {...props}
+//       xmlns="http://www.w3.org/2000/svg"
+//       width="24"
+//       height="24"
+//       viewBox="0 0 24 24"
+//       fill="none"
+//       stroke="currentColor"
+//       strokeWidth="2"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     >
+//       <line x1="4" x2="20" y1="12" y2="12" />
+//       <line x1="4" x2="20" y1="6" y2="6" />
+//       <line x1="4" x2="20" y1="18" y2="18" />
+//     </svg>
+//   )
+// }
+
+
+// function MountainIcon(props: React.SVGProps<SVGSVGElement>) {
+//   return (
+//     <svg
+//       {...props}
+//       xmlns="http://www.w3.org/2000/svg"
+//       width="24"
+//       height="24"
+//       viewBox="0 0 24 24"
+//       fill="none"
+//       stroke="currentColor"
+//       strokeWidth="2"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     >
+//       <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+//     </svg>
+//   )
+// }
