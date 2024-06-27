@@ -71,7 +71,7 @@ export default function Component() {
     }
   })
   return (
-    <section className="w-full py-12 bg-[#f7f7f7] overflow-hidden" style={{ height: 'calc(100vh - 4rem)' }}>
+    <section className="w-full py-12 bg-[#f7f7f7]" style={{ height: 'calc(100vh - 4rem)' }}>
       <div className="container grid lg:grid-cols-3 gap-6 px-4 md:px-6">
 
         <div className="grid col-span-2  gap-6 md:gap-8 p-4 bg-white shadow-md rounded-md overflow-y-hidden">

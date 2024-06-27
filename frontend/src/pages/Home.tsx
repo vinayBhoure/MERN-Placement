@@ -16,40 +16,40 @@ function Home() {
           <h1 className="text-4xl font-bold">Latest Products  </h1>
           <Link to="/search" className="text-base">More</Link>
         </div>
-        <main className="w-full flex gap-4 overflow-x-auto scroll-bar-none">
+        <main className="w-full flex gap-6 overflow-x-auto scroll-bar-none">
 
           <ProductCard
             productId="1"
             name="Product 1"
-            imageUrl={image}
+            photo={image}
             price={100}
             stock={10}
             handler={addToCartHandler} />
           <ProductCard
             productId="1"
             name="Product 1"
-            imageUrl={image}
+            photo={image}
             price={100}
             stock={10}
             handler={addToCartHandler} />
           <ProductCard
             productId="1"
             name="Product 1"
-            imageUrl={image}
+            photo={image}
             price={100}
             stock={10}
             handler={addToCartHandler} />
           <ProductCard
             productId="1"
             name="Product 1"
-            imageUrl={image}
+            photo={image}
             price={100}
             stock={10}
             handler={addToCartHandler} />
           <ProductCard
             productId="1"
             name="Product 1"
-            imageUrl={image}
+            photo={image}
             price={100}
             stock={10}
             handler={addToCartHandler} />

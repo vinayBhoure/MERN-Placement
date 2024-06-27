@@ -22,7 +22,8 @@ function ProductCard({ productId, name, photo, price, stock, handler }: ProductC
     //     </button>
     //   </div>
     // </div>
-    <div key={productId} className="bg-background relative rounded-lg shadow-md overflow-hidden">
+    <div key={productId} className="bg-background relative rounded-lg shadow-md overflow-hidden
+    min-w-[18rem]">
       <img
         src={photo} // {server + photo}
         alt={name}
