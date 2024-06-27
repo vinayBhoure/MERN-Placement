@@ -6,6 +6,8 @@ import Loader from './components/Loader'
 const Home = lazy(() => import('./pages/Home'))
 const Search = lazy(() => import('./pages/Search'))
 const Cart = lazy(() => import('./pages/Cart'))
+const ShippingPage = lazy(() => import('./pages/ShippingPage'))
+const LoginPage = lazy(() => import('./pages/LoginPage'))
 
 // ADMIN DASHBOARD IMPORTS
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
@@ -37,22 +39,30 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Logged In user routes */}
+          <Route>
+            <Route path="/shipping" element={<ShippingPage />} />
+          </Route>
 
           {/* ADMIN DASHBOARD ROUTES */}
-          <Route path='/admin/dashboard' element={<Dashboard />} />
-          <Route path='/admin/products' element={<Products />} />
-          <Route path='/admin/transactions' element={<Transactions />} />
-          <Route path='/admin/customers' element={<Customers />} />
+          <Route>
+            <Route path='/admin/dashboard' element={<Dashboard />} />
+            <Route path='/admin/products' element={<Products />} />
+            <Route path='/admin/transactions' element={<Transactions />} />
+            <Route path='/admin/customers' element={<Customers />} />
 
-          {/* Management */}
-          <Route path='/admin/product/new' element={<AddNewProduct />} />
-          <Route path='/admin/product/:id' element={<ProductManagement />} />
-          <Route path='/admin/transaction/:id' element={<TransactionManagement />} />
+            {/* Management */}
+            <Route path='/admin/product/new' element={<AddNewProduct />} />
+            <Route path='/admin/product/:id' element={<ProductManagement />} />
+            <Route path='/admin/transaction/:id' element={<TransactionManagement />} />
 
-          {/* Charts */}
-          <Route path='/admin/charts/bar' element={<BarChart />} />
-          <Route path='/admin/charts/line' element={<LineChart />} />
-          <Route path='/admin/charts/pie' element={<PieChart />} />
+            {/* Charts */}
+            <Route path='/admin/charts/bar' element={<BarChart />} />
+            <Route path='/admin/charts/line' element={<LineChart />} />
+            <Route path='/admin/charts/pie' element={<PieChart />} />
+          </Route>
 
         </Routes>
       </Suspense>
