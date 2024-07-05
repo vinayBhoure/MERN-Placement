@@ -35,7 +35,7 @@ function TableHOC<T extends Object>(columns: Column<T>[], data: T[], containerCl
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {
-                                headerGroup.headers.map((column: any) => (
+                                headerGroup.headers.map((column: any , idx) => (
                                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                         {column.render('Header')}
                                         {column.isSorted && <span className="text-sm">{column.isSortedDesc ? "⬇️" : "⬆️" }</span>}

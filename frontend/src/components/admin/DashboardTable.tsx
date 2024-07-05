@@ -1,17 +1,11 @@
 import { Column } from "react-table";
 import TableHOC from "./TableHOC";
+import { TransactionStat } from "@/types/types";
 
-interface Datatype {
-  id: string,
-  quantity: number,
-  discount: number,
-  amount: number,
-  status: string
-}
 
-const columns: Column<Datatype>[] = [{
+const columns: Column<TransactionStat>[] = [{
   Header: "Id",
-  accessor: "id",
+  accessor: "_id",
 },
 {
   Header: "Quantity",
@@ -31,8 +25,8 @@ const columns: Column<Datatype>[] = [{
 }
 ]
 
-const DashboardTable = ({data = []} : {data: Datatype[]}) => {
-  return TableHOC<Datatype>(columns, data, "transaction-box", "Top Transactions")();
+const DashboardTable = ({data = []} : {data: TransactionStat[]}) => {
+  return TableHOC<TransactionStat>(columns, data, "transaction-box", "Top Transactions")();
 }
 
 export default DashboardTable

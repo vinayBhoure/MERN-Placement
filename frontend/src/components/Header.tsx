@@ -5,14 +5,38 @@
  */
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
+import { User } from "@/types/types"
+import { signOut } from "firebase/auth"
+import { auth } from "@/auth/firebase"
+import toast from "react-hot-toast"
+import { useState } from "react"
 
-const user = { _id: 1, role: "admin" }
 
-export default function Component() {
+type PropsType = {
+    user: User | null
+}
+
+export default function Component({user}:PropsType) {
+
+    const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate()
+
+
+    const logoutHandler = async() => {
+        try{
+           await signOut(auth);
+           user = null
+           navigate('/login')
+           toast.success('Logged out successfully')
+        }catch(error){
+            console.error(error)
+        }
+    }
+
     return (
         <header className="flex items-center h-16 px-4 md:px-6 bg-background border-b">
             <div className="flex items-center gap-4 md:hidden">
@@ -61,44 +85,47 @@ export default function Component() {
             </nav>
             {user?._id ?
                 <div className="ml-auto flex items-center gap-4">
-                    <Dialog>
+                    <Dialog open={isOpen} onOpenChange={setIsOpen} >
                         <DialogTrigger asChild>
-                            <Button variant="ghost" size="icon">
+                            <Button variant="ghost" size="icon" onClick={() => setIsOpen(true)}>
                                 <Avatar className="h-8 w-8">
-                                    <AvatarImage src="/placeholder-user.jpg" />
-                                    <AvatarFallback>JP</AvatarFallback>
+                                    <AvatarImage src={user.photo} />
+                                    <AvatarFallback>{user.name[0]}</AvatarFallback>
                                 </Avatar>
                             </Button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-[425px] max-w-[90vw] w-full">
                             <div className="flex flex-col gap-4 py-6 px-4">
                                 <div className="grid gap-2">
-                                    <h3 className="text-lg font-bold">John Doe</h3>
-                                    <p className="text-sm text-muted-foreground">johndoe@example.com</p>
+                                    <h3 className="text-lg font-bold">{user.name}</h3>
+                                    <p className="text-sm text-muted-foreground">{user.email}</p>
                                 </div>
                                 <Separator />
                                 <div className="grid gap-2">
-                                    {user.role === "admin" &&
-                                        <Button variant="ghost" asChild>
+                                    {user.role === 'admin' &&
+                                        <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
                                             <Link to="/admin/dashboard" className="justify-start gap-2" >
                                                 <SettingsIcon className="w-4 h-4" />
-                                                Admin
+                                                Dashboard
                                             </Link>
                                         </Button>
                                     }
-                                    <Button variant="ghost" asChild>
+                                    <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
                                         <Link to="/orders" className="justify-start gap-2" >
                                             <PackageIcon className="w-4 h-4" />
-                                            Orders
+                                            My Orders
                                         </Link>
                                     </Button>
-                                    <Button variant="ghost" asChild>
+                                    <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
                                         <Link to="/profile" className="justify-start gap-2" >
                                             Profile
                                         </Link>
                                     </Button>
-                                    <Button>
-                                        <Link to="/logout" className=" hover:underline underline-offset-4 flex gap-2 justify-start items-center" >
+                                    <Button onClick={() => {
+                                        setIsOpen(false)
+                                        logoutHandler()
+                                    }} >
+                                        <Link to="/login" className=" hover:underline underline-offset-4 flex gap-2 justify-start items-center" >
                                             <LogOutIcon className="w-4 h-4" />
                                             Logout
                                         </Link>

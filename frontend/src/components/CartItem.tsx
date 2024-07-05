@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
+import { server } from "@/redux/store"
 
 interface CartItemProps {
   cartItem: any,
@@ -11,40 +12,25 @@ interface CartItemProps {
 // image, productId name, price quantity
 
 function CartItem({ cartItem, handleIncrement, handleDecrement, handleRemove }: CartItemProps) {
+  
   return (
-    // <div className="flex w-full">
-    //   <img src={cartItem.imageUrl} alt={cartItem.name} />
-    //   <div className="flex justify-between w-full">
-    //     <article>
-    //       <Link to={`/product/${cartItem.productId}`}><h3>{cartItem.name}</h3></Link>
-    //       <span>{cartItem.price}</span>
-    //     </article>
-    //     <div className="w-[4rem]">
-    //       <button>-</button>
-    //       <span>{cartItem.quantity}</span>
-    //       <button>+</button>
-    //     {/* <button>Remove</button> */}
-    //     </div>
-    //   </div>
-
-    // </div>
-    <>
+   <>
       <li
         key={cartItem.productId}
         className="grid grid-cols-[100px_1fr_80px] md:grid-cols-[100px_1fr_100px] items-center gap-4"
       >
         <img
-          src={cartItem.photo}
+          src={`${server}/${cartItem.photo}`}
           alt={cartItem.name}
-          width={100}
-          height={100}
+          width={50}
+          height={50}
           className="rounded-lg object-cover"
         />
         <div className="grid gap-1">
           <Link to={`/product/${cartItem.productId}`}>
             <h3 className="font-semibold">{cartItem.name}</h3>
           </Link>
-          <div className="flex items-center gap-2">
+           <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="icon"

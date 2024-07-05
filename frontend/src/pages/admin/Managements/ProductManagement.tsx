@@ -1,25 +1,63 @@
+
+import { useDeleteProductMutation, useProductDetailsQuery } from "@/redux/api/productAPI";
 import ProductForm from "../../../components/admin/ProductForm"
 import Sidebar from "../../../components/admin/Sidebar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom";
+import { server } from "@/redux/store";
+import { AiOutlineDelete } from "react-icons/ai";
+import { handleResponse } from "@/features";
+import { useSelector } from "react-redux";
+import { UserState } from "@/redux/reducer/userReducer";
 
-interface FormDataType {
+
+interface ProductType {
   name: string;
   price: number;
   stock: number;
-  image: string;
+  category: string;
+  photo: string;
 }
 
-const img =
-  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=804";
-
 function ProductManagement() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data } = useProductDetailsQuery(id as string);
+  const [deleteProduct] = useDeleteProductMutation();
 
-  const [productDetails, setProductDetails] = useState<FormDataType>({
-    name: 'Nike',
-    price: 2,
-    stock: 3,
-    image: img
+  const {user} = useSelector((state: {userReducer: UserState}) => state.userReducer)
+
+  
+
+  const [productDetails, setProductDetails] = useState<ProductType>({
+    name: '',
+    price: 0,
+    stock: 0,
+    category: '',
+    photo: '',
   })
+
+
+  const deleteHandler = async () => {
+    // delete product
+    const response = await deleteProduct({ user_id: user?._id!, id: id as string });
+    handleResponse(response, navigate, '/admin/products')
+  }
+  
+
+  useEffect(() => {
+    if (data) {
+      setProductDetails({
+        name: data.product.name,
+        price: data.product.price,
+        stock: data.product.stock,
+        category: data.product.category,
+        photo: data.product.photo
+      })
+    }
+  }, [])
+
+
 
   return (
     <div className="grid grid-cols-5 gap-8 h-[100vh] bg-slate-200">
@@ -32,9 +70,9 @@ function ProductManagement() {
 
         <section className="overflow-y-auto w-full h-[85vh] max-w-[500px] shadow-md bg-white p-20 flex flex-col gap-4 relative rounded">
 
-          <strong className="font-300">Product Id - afnkjafkd</strong>
+          <strong className="font-300">Product Id - {data?.product._id}</strong>
 
-          <img className="w-full h-full object-cover" src={productDetails.image} alt={productDetails.image} />
+          <img className="w-full h-full object-cover" src={`${server}/${productDetails.photo}`} alt={productDetails.name} />
 
           <p className="text-center tracking-wide uppercase ">{productDetails.name}</p>
 
@@ -44,8 +82,11 @@ function ProductManagement() {
 
         </section>
 
-        <section className="h-[85vh] p-8 w-full max-w-[400px] bg-white rounded-md shadow-md">
-          <ProductForm data={productDetails} setData={setProductDetails} />
+        <section className="h-[85vh] p-8 w-full max-w-[400px] bg-white rounded-md shadow-md relative">
+          <ProductForm data={productDetails} updateState={true} />
+          <div className="absolute bg-black text-white rounded-full p-2 hover:cursor-pointer" style={{top:'-3%', right:'-5%'}} onClick={deleteHandler} >
+          <AiOutlineDelete size={25} />
+          </div>
         </section>
 
       </main>

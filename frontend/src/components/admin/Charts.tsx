@@ -28,7 +28,8 @@ ChartJS.register(
   Filler
 );
 
-const months = ["January", "February", "March", "April", "May", "June", "July"];
+const months = ["January", "February", "March", "April", "May", "June"];
+
 
 interface BarChartProps {
   horizontal?: boolean;
