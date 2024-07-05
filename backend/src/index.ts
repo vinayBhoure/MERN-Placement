@@ -9,20 +9,31 @@ import { globalCatch } from './middlewares/error.js';
 import NodeCache from 'node-cache';
 import { config } from 'dotenv';
 import morgan from 'morgan';
+import cors from 'cors';
 import Stripe from 'stripe';
 const app = express();
 const PORT = 3000;
 
-export const stripe = new Stripe("dsafa");
+
+
 export const nodeCache = new NodeCache();
 config({
-    path: "./.env"
+    path: ".env"
 })
 
 // creating a static folder - uploads. Without this middlerware, it will be treated as apiroute.
 app.use("/uploads", express.static("uploads")); 
 app.use(express.json());
 app.use(morgan("dev"));
+
+app.use(
+    cors({
+      origin: ["http://localhost:5173"],
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true,
+    })
+  );
+
 
 app.get('/', (req, res) => {
     res.send('Express + TypeScript Server');

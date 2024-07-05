@@ -3,7 +3,7 @@ import { TryCatch } from "../middlewares/error.js";
 import ErrorHandler, { invalidateCache } from "../utils/class.js";
 import { BaseQueryForSearch, NewProductRequestBody } from "../types/types.js";
 import { rm } from "fs";
-import  Product  from "../models/product.js";
+import Product from "../models/product.js";
 import { nodeCache } from "../index.js";
 
 export const newProduct = TryCatch(async (
@@ -32,7 +32,7 @@ export const newProduct = TryCatch(async (
         photo: photo.path,
     });
 
-    await invalidateCache({product:true, admin:true});
+    await invalidateCache({ product: true, admin: true });
 
     return res.status(201).json({
         success: true,
@@ -97,12 +97,13 @@ export const getProductsByCategory = TryCatch(async (req, res, next) => {
     });
 })
 
+//to get all products - adminonly
 export const getAdminProducts = TryCatch(async (req, res, next) => {
-    
+
     let products
-    if(nodeCache.has("all-products")){
+    if (nodeCache.has("all-products")) {
         products = JSON.parse(nodeCache.get("all-products") as string);
-    }else{
+    } else {
         products = await Product.find({});
         nodeCache.set("all-products", JSON.stringify(products));
     }
@@ -116,11 +117,11 @@ export const getAdminProducts = TryCatch(async (req, res, next) => {
 export const getSingleProduct = TryCatch(async (req, res, next) => {
 
     let product
-    if(nodeCache.has(`product-${req.params.id}`)){
+    if (nodeCache.has(`product-${req.params.id}`)) {
         product = JSON.parse(nodeCache.get(`product-${req.params.id}`) as string);
-    }else{
+    } else {
         product = await Product.findById(req.params.id);
-        if(!product) return next(new ErrorHandler("Product not found", 404));
+        if (!product) return next(new ErrorHandler("Product not found", 404));
         nodeCache.set(`product-${req.params.id}`, JSON.stringify(product));
     }
 
@@ -160,7 +161,7 @@ export const updateProduct = TryCatch(async (req, res, next) => {
         product: true,
         productId: String(product._id),
         admin: true,
-      });
+    });
 
     res.status(200).json({
         success: true,
@@ -191,6 +192,7 @@ export const deleteProduct = TryCatch(async (req, res, next) => {
     });
 })
 
+//to get all products with filter
 export const getAllProduct = TryCatch(async (req, res, next) => {
 
     const { category, price, sort, search } = req.query;
@@ -207,7 +209,12 @@ export const getAllProduct = TryCatch(async (req, res, next) => {
             $options: "i",
         };
 
-    if (category) baseQuery.category = category as string;
+
+    if (category === "All") {
+        delete baseQuery.category;
+    } else if (category) {
+        baseQuery.category = category as string;
+    }
     if (price) baseQuery.price = {
         $lte: Number(price),
     };

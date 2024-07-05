@@ -159,12 +159,14 @@ export const getDashboardInfo = TryCatch(async (req, res, next) => {
         const categoryCountPromise: any[] = categories.map((category) => {
             Product.countDocuments({ category })
         })
+        
         const categoryCount = await Promise.all(categoryCountPromise);
-        console.log(categoryCount)
+        
         const categoryData: Record<string, number>[] = [];
+        
         categories.map((category, index) => {
             categoryData.push({
-                [category]: Math.round((categoryCount[index] / productCount) * 100)
+                [category]: Math.round((categoryCount[index] / productCount))
             })
         })
 
