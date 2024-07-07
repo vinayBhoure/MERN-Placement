@@ -13,7 +13,7 @@ export const newUser = TryCatch(async (
 
   let user
   if (_id) user = await User.findById(_id);
-
+  
   if (user)
     return res.status(200).json({
       success: true,

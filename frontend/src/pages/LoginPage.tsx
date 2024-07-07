@@ -32,13 +32,13 @@ function LoginPage() {
         dob: date,
         _id: user.uid,
       })
-      console.log(result);
 
       if ("data" in result) {
 
         if (result.data?.message) {
           toast.success(result.data?.message);
-          navigate('/');
+          // window.open("/", "_self");
+          navigate("/");
         }
 
       } else {
@@ -52,7 +52,7 @@ function LoginPage() {
     } catch (error) {
       toast.error("Sign In Failed")
     }
-  }, [])
+  }, [[gender, date, login, navigate]])
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#f7f7f7]">
