@@ -47,6 +47,27 @@ function PaymentStatus() {
   //   total,
   //   orderItems: cartItems
   // }
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function initiateOrder() {
+      try {
+        await placeOrder();
+        toast.success("Order placed successfully");
+        navigate("/orders");
+      } catch (error) {
+        toast.error("Failed to place order");
+        navigate("/");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    initiateOrder();
+  }, [productInfo, transactionId, navigate]);
+
+
   async function placeOrder() {
     const storedData = localStorage.getItem(productInfo!);
     const parsedData = storedData ? JSON.parse(storedData) : null;
@@ -63,14 +84,11 @@ function PaymentStatus() {
   //   placeOrder();
   //   navigate("/orders")
   // }
-  useEffect(() => {
-    placeOrder();
-  }, [1]);
 
   return (
     <>
       {
-        false ?
+        loading ?
           <Loader /> :
           <div className="flex flex-col items-center justify-center gap-8" style={{ minHeight: 'calc(100vh - 4rem)' }}>
             <p className="text-4xl font-semibold">Payment Status</p>

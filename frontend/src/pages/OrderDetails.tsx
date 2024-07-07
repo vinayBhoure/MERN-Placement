@@ -49,11 +49,11 @@ function OrderDetails() {
   }, [orderDetail])
 
   return (
-    <main className=" p-8 col-span-4 flex justify-center items-center gap-4 bg-[#f7f7f7]" style={{ minHeight: 'calc(100vh - 4rem)' }}>
+    <main className=" p-8 col-span-4 flex md:flex-row flex-col justify-center items-center gap-4 bg-[#f7f7f7]" style={{ minHeight: 'calc(100vh - 4rem)' }}>
 
       {isLoading ? <Loader /> :
         <>
-          <button className="h-[2.5rem] w-[2.5rem] bg-black grid place-content-center fixed top-20 left-12 rounded-full pointer transition-all duration-300" onClick={() => { history.go(-1) }}
+          <button className=" z-10 h-[2.5rem] w-[2.5rem] bg-black grid place-content-center fixed top-20 left-12 rounded-full pointer transition-all duration-300" onClick={() => { history.go(-1) }}
           ><BiArrowBack color="white" className="hover:-translate-x-1"></BiArrowBack></button>
 
           <section className="overflow-y-auto w-full h-[85vh] max-w-[500px] shadow-md bg-white p-8 flex flex-col gap-4 relative rounded">
@@ -69,7 +69,7 @@ function OrderDetails() {
             ))}
           </section>
 
-          <section className=" overflow-y-auto h-[85vh] p-8 w-full max-w-[400px] bg-white rounded-md shadow-md">
+          <section className=" md:overflow-y-auto min-h-[85vh] p-8 w-full max-w-[400px] bg-white rounded-md shadow-md">
 
             <h1 className="text-2xl text-center">Order Info</h1>
             <h5 className="text-lg mt-6 ml-2 font-semibold border-b-2">User Info</h5>

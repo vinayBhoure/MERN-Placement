@@ -1,4 +1,4 @@
-import { RootState, server } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import { Loader } from "lucide-react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";

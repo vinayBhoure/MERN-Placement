@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import toast from "react-hot-toast"
 import { auth } from "../auth/firebase"
-import {  useLoginMutation } from "@/redux/api/userAPI"
+import { useLoginMutation } from "@/redux/api/userAPI"
 import { useCallback, useState } from "react"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { MessageTypes } from "@/types/apiTypes"
@@ -37,8 +37,8 @@ function LoginPage() {
 
         if (result.data?.message) {
           toast.success(result.data?.message);
-          // window.open("/", "_self");
-          navigate("/");
+          window.open("/", "_self");
+          // navigate("/");
         }
 
       } else {
@@ -69,7 +69,11 @@ function LoginPage() {
           <div className="flex flex-col gap-8 py-4">
             <div className="flex flex-col gap-2">
               <label htmlFor="gender">Gender</label>
-              <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)}
+              <select
+                id="gender"
+                required
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
                 className="border rounded p-2 text-slate-600">
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
@@ -81,6 +85,7 @@ function LoginPage() {
               <label htmlFor="dob" >Date of birth</label>
               <input
                 id="dob"
+                required
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}

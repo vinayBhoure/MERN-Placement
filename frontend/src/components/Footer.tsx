@@ -1,10 +1,4 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/o5fqm8ukhQx
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import { Link } from "react-router-dom"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 export default function Footer() {
@@ -14,13 +8,13 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <Link to="#" className="flex items-center gap-2" >
             <MountainIcon className="h-6 w-6" />
-            <span className="font-bold text-lg">Acme Inc.</span>
+            <span className="font-bold text-lg">Alonzo Clothing</span>
           </Link>
           <div className="flex flex-col gap-2">
-            <p>123 Main Street</p>
-            <p>Anytown, USA 12345</p>
-            <p>Phone: (123) 456-7890</p>
-            <p>Email: info@acme.com</p>
+            <p>366/4 Rishi Palace Colony</p>
+            <p>Indore, Madhya Pradesh</p>
+            <p>Phone: (+91) 9343297622</p>
+            <p>Email: workwithviinay.com</p>
           </div>
           <div className="flex gap-4">
             <Link to="#" className="text-muted-foreground hover:text-primary" >
@@ -37,10 +31,10 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 relative">
           <h3 className="font-bold text-lg">Navigation</h3>
           <nav className="flex flex-col gap-2">
-            <Link to="#" className="hover:text-primary" >
+            <Link to="/" className="hover:text-primary" >
               Home
             </Link>
             <Link to="#" className="hover:text-primary" >
@@ -75,16 +69,16 @@ export default function Footer() {
           </nav>
         </div>
         <div className="flex flex-col gap-4">
-          <h3 className="font-bold text-lg">Subscribe</h3>
-          <p>Sign up for our newsletter to stay up-to-date on the latest news and updates.</p>
+          <h3 className="font-bold text-lg">Contact</h3>
+          <p>Drop your suggestions or query with us.</p>
           <form className="flex gap-2">
-            <Input type="email" placeholder="Enter your email" className="flex-1" />
-            <Button type="submit">Subscribe</Button>
+            <textarea placeholder="Write your message here." className="flex-1 p-1 focus:outline-none h-10" />
+            <Button type="submit">Send</Button>
           </form>
         </div>
       </div>
       <div className="container max-w-7xl mt-8 flex items-center justify-between">
-        <p className="text-xs">&copy; 2024 Acme Inc.</p>
+        <p className="text-xs">&copy; Created by VINAY BHOURE</p>
         <nav className="flex gap-4">
           <Link to="#" className="text-xs hover:text-primary" >
             Terms of Service
