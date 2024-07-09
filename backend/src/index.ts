@@ -14,12 +14,6 @@ import Stripe from 'stripe';
 const app = express();
 const PORT = 3000;
 
-export const PHONE_PE_URI = "https://api-preprod.phonepe.com/apis/pg-sandbox";
-export const MERCHANT_ID = "PGTESTPAYUAT86"; 
-export const SALT_INDEX = 1
-export const SALT_KEY = "96434309-7796-489d-8924-ab56988a6076"
-export const payloadEndpoints = "/pg/v1/pay"
-
 export const nodeCache = new NodeCache();
 config({
     path: ".env"
