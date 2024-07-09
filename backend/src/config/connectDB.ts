@@ -7,7 +7,7 @@ config({
 
 export const connectDB = async () => {
     try{
-        const conn = await mongoose.connect("mongodb+srv://bhoure21:ecommerce@cluster0.jrczoxr.mongodb.net/")
+        const conn = await mongoose.connect(process.env.MONGO_URI);
         console.log(`MongoDB Connected: ${conn.connection.host}`)
         
     }catch(err){
